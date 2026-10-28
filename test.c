@@ -1,21 +1,27 @@
+
+
 #include <stdio.h>
 #include "mutable_string.h"
 
 int main(void)
 {
+    MutableString *s = ms_create("hello");
 
-MutableString *s = ms_create("Muhsin is a good boy");
+    if (s == NULL) {
+        fprintf(stderr, "Creation failed\n");
+        return 1;
+    }
 
-if (s==NULL){
-    fprintf(stderr,"Allocation failed\n");
-    return  1;
-  }
-printf("String: %s\n",s->data);
-printf("length: %zu\n",s->length);
-printf("Capacity: %zu\n",s->capacity);
+    if (ms_append(s, " Musi") != 0) {
+        fprintf(stderr, "Append failed\n");
+        ms_destroy(s);
+        return 1;
+    }
 
-ms_destroy(s);
-return 0;
+    printf("String: %s\n", s->data);
+    printf("Length: %zu\n", s->length);
+    printf("Capacity: %zu\n", s->capacity);
 
-
+    ms_destroy(s);
+    return 0;
 }
