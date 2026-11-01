@@ -49,7 +49,7 @@ void ms_destroy(MutableString *s)
 
 int ms_append(MutableString *s,const char *text)
 {
-  if(s==NULL | text == NULL){
+  if(s==NULL || text == NULL){
     return -1;
   }
   
